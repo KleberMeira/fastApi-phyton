@@ -3,12 +3,13 @@ from core.database import engine
 
 async def create_table() -> None:
     import models.__all_models
-    print('Criando tabela no banco de dados...')
+    print('Criando as tabelas no banco de dados')
 
     async with engine.begin() as conn:
-        await conn.run_async(settings.DBbaseModel.metadata.drop_all)
-        await conn.run_async(settings.DBbaseModel.metadata.create_all)
-    print('Tabelas criadas...')
+        await conn.run_sync(settings.DBbaseModel.metadata.drop_all)
+        await conn.run_sync(settings.DBbaseModel.metadata.create_all)
+
+        print('Tabelas criadas com sucesso...')
 
 if __name__ == '__main__':
     import asyncio
