@@ -1,16 +1,13 @@
 from fastapi import FastAPI
-from fastapi import HTTPException
-from fastapi import status
-from time import sleep
-from fastapi import Depends
+from core.configs import settings
+from api.v1.api import api_router
 
-from routes import curso_route
-from routes import usuario_route
 
-app = FastAPI()
-app.include_router(curso_route.router, tags=['cursos'])
-app.include_router(usuario_route.router, tags=['usuarios'])
+app = FastAPI(title='Cursos FastApi - FastApi SQL Alchemy')
+app.include_router(api_router, prefix=settings.API_V1_STR)
 
+# api/v1/cursos
+# api/v1/usuarios
 
 if __name__ == 'main':
     import uvicorn
